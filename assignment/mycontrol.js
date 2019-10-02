@@ -58,9 +58,7 @@ const CheckLight = function()
         console.log("Nodejs: Dark.. RELAY on");
         gpio.digitalWrite(RELAY, gpio.HIGH);
     }
-
-    if(BLUE == 1 && RED == 1 && GREEN == 1)
-        setTimeout(CheckLight, 300);
+    setTimeout(CheckLight, 300);
 }
 
 const MyControl = function()
