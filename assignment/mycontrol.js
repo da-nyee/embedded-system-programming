@@ -9,6 +9,7 @@ const GREEN = 27;
 const BUZZER = 26;
 const RELAY = 25;
 var count = 0;
+var stop = null;
 
 const TurnOnOneLED = function()
 {
@@ -58,7 +59,7 @@ const CheckLight = function()
         console.log("Nodejs: Dark.. RELAY on");
         gpio.digitalWrite(RELAY, gpio.HIGH);
     }
-    setTimeout(CheckLight, 300);
+    stop = setTimeout(CheckLight, 300);
 }
 
 const MyControl = function()
@@ -82,6 +83,7 @@ const MyControl = function()
                     TurnOnLEDs();
                     break;
             case 1: console.log("Second Pressed!");
+                    clearTimeout(stop);
                     TurnOnBuzzer();
                     setTimeout(TurnOffBuzzer, 100);
                     TurnOffLEDs();
