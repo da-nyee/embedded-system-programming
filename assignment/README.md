@@ -11,3 +11,18 @@
 5. light 센서에 '밝음→어두움' 변화가 측정되면 relay를 제어하여 전류를 흐르게 한다.
 6. light 센서에 '어두움→밝음' 변화가 측정되면 relay를 제어하여 전류를 차단시킨다.
 7. 무한반복 실행되며, ctrl+c를 누르면 buzzer, LEDs, relay가 모두 꺼진 후 프로그램이 종료된다.
+<br>
+
+## myprg.js
+### Sensors
+- a touch and light
+### Actuators
+- a buzzer and LEDs
+### Development Requirements
+1. touch 센서를 첫번째로 터치하면 buzzer 소리가 0.05초 동안 나면서 3색 LEDs의 청녹색이 켜진다.
+2. touch 센서를 두번째로 터치하면 buzzer 소리가 0.08초 동안 나면서 3색 LEDs의 청녹색이 꺼진다.
+3. 3색 LEDs의 청녹색이 켜져있을 때만 light 센서가 빛을 측정한다.
+4. light 센서에 '밝음→어두움' 변화가 측정되면 3색 LEDs의 빨간색이 켜진다.
+5. light 센서에 '어두움→밝음' 변화가 측정되면 3색 LEDs의 빨간색이 꺼진다.
+6. touch 센서를 세번째로 터치하면 buzzer 소리가 0.1초 동안 2번(삐, 삐) 나면서 3색 LEDs가 모두 꺼진다.
+7. 무한반복 실행되며, ctrl+c를 누르면 buzzer, LEDs가 모두 꺼진 후 프로그램이 종료된다.
