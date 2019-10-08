@@ -3,8 +3,16 @@ const BUTTON = 24;
 const BLUE = 29;
 const RED = 28;
 const GREEN = 27;
+const BUZZER = 26;
 var caseCount = 0;
 var ledCount = 0;
+
+const ControlBuzzer = function()
+{
+    gpio.digitalWrite(BUZZER, 1);
+    gpio.delay(50);
+    gpio.digitalWrite(BUZZER, 0);
+}
 
 const DetectButton = function()
 {
@@ -23,6 +31,7 @@ const DetectButton = function()
                 gpio.softPwmWrite(GREEN, 100);
             else
             {
+                ControlBuzzer();
                 ledCount = 0;
                 caseCount++;
             }
@@ -42,6 +51,7 @@ const DetectButton = function()
                 gpio.softPwmWrite(BLUE, 100);
             else
             {
+                ControlBuzzer();
                 ledCount = 0;
                 caseCount++;
             }
@@ -61,6 +71,7 @@ const DetectButton = function()
                 gpio.softPwmWrite(RED, 100);
             else
             {
+                ControlBuzzer();
                 ledCount = 0;
                 caseCount++;
             }
@@ -109,6 +120,7 @@ const DetectButton = function()
             gpio.softPwmWrite(GREEN, 0);
             gpio.softPwmWrite(BLUE, 0);
             gpio.softPwmWrite(RED, 0);
+            ControlBuzzer();
             caseCount = 0;
             break;
         default:
@@ -121,6 +133,7 @@ process.on('SIGINT', function()
     gpio.digitalWrite(BLUE, 0);
     gpio.digitalWrite(RED, 0);
     gpio.digitalWrite(GREEN, 0);
+    gpio.digitalWrite(BUZZER, 0);
     console.log("Program Exit..");
     process.exit();
 })
@@ -130,6 +143,7 @@ gpio.pinMode(BUTTON, gpio.INPUT);
 gpio.pinMode(BLUE, gpio.OUTPUT);
 gpio.pinMode(RED, gpio.OUTPUT);
 gpio.pinMode(GREEN, gpio.OUTPUT);
+gpio.pinMode(BUZZER, gpio.OUTPUT);
 gpio.wiringPiISR(BUTTON, gpio.INT_EDGE_RISING, DetectButton);
 gpio.softPwmCreate(BLUE, 0, 100);
 gpio.softPwmCreate(RED, 0, 100);
