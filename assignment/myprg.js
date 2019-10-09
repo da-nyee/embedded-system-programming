@@ -78,7 +78,7 @@ process.on('SIGINT', function()
     gpio.digitalWrite(BUZZER, 0);
     console.log("Program Exit..");
     process.exit();
-})
+});
 
 gpio.setup('wpi');
 gpio.pinMode(LIGHT, gpio.INPUT);

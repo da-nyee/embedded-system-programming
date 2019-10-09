@@ -106,7 +106,7 @@ process.on('SIGINT', function()
     gpio.digitalWrite(RELAY, 0);
     console.log("Program Exit..");
     process.exit();
-})
+});
 
 gpio.wiringPiSetup();
 gpio.pinMode(BUTTON, gpio.INPUT);
