@@ -19,7 +19,7 @@ process.on('SIGINT', function()
     gpio.digitalWrite(BLUELED, 0);
     console.log("Program Exit...");
     process.exit();
-})
+});
 
 gpio.wiringPiSetup();
 gpio.pinMode(SOUND, gpio.INPUT);
