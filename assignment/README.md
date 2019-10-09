@@ -40,3 +40,15 @@
 4. button을 누를 때마다 LEDs의 색상은 초록→파랑→빨강→하양 순으로 켜진다. 이후에는 다시 처음으로 돌아간다.
 5. buzzer는 LEDs의 색상이 바뀌는 시점에 0.05초 동안 짧게 울린다.
 6. 무한반복 실행되며, ctrl+c를 누르면 LEDs, buzzer가 모두 꺼진 후 프로그램이 종료된다.
+
+## ledcontrol.js
+### Sensor
+- a button
+### Actuators
+- LEDs and a buzzer
+### Development Requirements
+1. button을 첫번째로 누르면 파란색 LED가 켜지고 꺼진다.
+2. button을 두번째로 누르면 빨간색 LED가 켜지고 꺼진다.
+3. button을 세번째로 누르면 초록색 LED가 켜지고 꺼진다.
+4. 각 LED가 켜질 때마다 buzzer에서 소리가 난다.
+5. 무한반복 실행되며, ctrl+c를 누르면 LEDs, buzzer가 모두 꺼진 후 프로그램이 종료된다.
