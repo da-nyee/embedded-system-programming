@@ -7,18 +7,20 @@ const BUZZER = 26;
 var caseCount = 0;
 var ledCount = 0;
 
-const ControlBuzzer = function()
+const NextColour = function()
 {
     gpio.digitalWrite(BUZZER, 1);
     gpio.delay(50);
     gpio.digitalWrite(BUZZER, 0);
+    ledCount = 0;
+    caseCount++;
 }
 
 const DetectButton = function()
 {
-    switch(caseCount)
+    switch(caseCount % 4)
     {
-        case 0: 
+        case 0:
             if(ledCount === 0) // strict equality
                 gpio.softPwmWrite(GREEN, 1);
             else if(ledCount === 1)
@@ -29,16 +31,14 @@ const DetectButton = function()
                 gpio.softPwmWrite(GREEN, 75);
             else if(ledCount === 4)
                 gpio.softPwmWrite(GREEN, 100);
-            else
+            else if(ledCount === 5)
             {
-                ControlBuzzer();
-                ledCount = 0;
-                caseCount++;
+                gpio.softPwmWrite(GREEN, 0);
+                NextColour();
             }
             ledCount++;
             break;
         case 1:
-            gpio.softPwmWrite(GREEN, 0);
             if(ledCount === 0)
                 gpio.softPwmWrite(BLUE, 1);
             else if(ledCount === 1)
@@ -49,16 +49,14 @@ const DetectButton = function()
                 gpio.softPwmWrite(BLUE, 75);
             else if(ledCount === 4)
                 gpio.softPwmWrite(BLUE, 100);
-            else
+            else if(ledCount === 5)
             {
-                ControlBuzzer();
-                ledCount = 0;
-                caseCount++;
+                gpio.softPwmWrite(BLUE, 0);
+                NextColour();
             }
             ledCount++;
             break;
         case 2:
-            gpio.softPwmWrite(BLUE, 0);
             if(ledCount === 0)
                 gpio.softPwmWrite(RED, 1);
             else if(ledCount === 1)
@@ -69,16 +67,14 @@ const DetectButton = function()
                 gpio.softPwmWrite(RED, 75);
             else if(ledCount === 4)
                 gpio.softPwmWrite(RED, 100);
-            else
+            else if(ledCount === 5)
             {
-                ControlBuzzer();
-                ledCount = 0;
-                caseCount++;
+                gpio.softPwmWrite(RED, 0);
+                NextColour();
             }
             ledCount++;
             break;
         case 3:
-            gpio.softPwmWrite(RED, 0);
             if(ledCount === 0)
             {
                 gpio.softPwmWrite(GREEN, 1);
@@ -109,19 +105,14 @@ const DetectButton = function()
                 gpio.softPwmWrite(BLUE, 100);
                 gpio.softPwmWrite(RED, 100);
             }
-            else
+            else if(ledCount === 5)
             {
-                ledCount = 0;
-                caseCount++;
+                gpio.softPwmWrite(GREEN, 0);
+                gpio.softPwmWrite(BLUE, 0);
+                gpio.softPwmWrite(RED, 0);
+                NextColour();
             }
             ledCount++;
-            break;
-        case 4:
-            gpio.softPwmWrite(GREEN, 0);
-            gpio.softPwmWrite(BLUE, 0);
-            gpio.softPwmWrite(RED, 0);
-            ControlBuzzer();
-            caseCount = 0;
             break;
         default:
             break;
@@ -136,7 +127,7 @@ process.on('SIGINT', function()
     gpio.digitalWrite(BUZZER, 0);
     console.log("Program Exit..");
     process.exit();
-})
+});
 
 gpio.wiringPiSetup();
 gpio.pinMode(BUTTON, gpio.INPUT);
