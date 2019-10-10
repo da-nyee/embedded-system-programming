@@ -6,6 +6,7 @@ const BUZZER = 25;
 const TOUCH = 27;
 const LIGHT = 23;
 var count = 0;
+var stop = null;
 
 const TurnOnBuzzer = function()
 {
@@ -33,6 +34,7 @@ const CheckTouch = function()
                     break;
             case 1: TurnOnBuzzer();
                     setTimeout(TurnOffBuzzer, 80);
+                    clearTimeout(stop);
                     gpio.digitalWrite(BLUE, 0);
                     gpio.digitalWrite(GREEN, 0);
                     break;
@@ -67,7 +69,7 @@ const CheckLight = function()
         gpio.digitalWrite(BLUE, 0);
         gpio.digitalWrite(GREEN, 0);
     }
-       setTimeout(CheckLight, 2000);
+    stop = setTimeout(CheckLight, 2000);
 }
 
 process.on('SIGINT', function()
