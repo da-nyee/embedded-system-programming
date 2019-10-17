@@ -2,13 +2,11 @@ const gpio = require('node-wiring-pi');
 const http = require('http');
 const fs = require('fs');
 const socketio = require('socket.io');
-
 const LED = 22;
 const BUZZER = 24;
 const RED = 29;
 const GREEN = 27;
 const BLUE = 26;
-
 var led, buzzer, r, g, b;
 var timeout = 500;
 
