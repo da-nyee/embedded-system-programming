@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            window.onload = function(){
+                var socket = io.connect();
+                var html = '';
+
+                document.getElementById('ledon').onclick = function(){
+                    var text = 500;
+                    socket.emit('oneLEDon', text);
+                };
+
+                document.getElementById('ledoff').onclick = function(){
+                    socket.emit('oneLEDoff');
+                };
+
+                document.getElementById('buzzeron').onclick = function(){
+                    var text = 500;
+                    socket.emit('BUZZERon', text);
+                };
+
+                document.getElementById('buzzeroff').onclick = function(){
+                    socket.emit('BUZZERoff');
+                };
+
+                document.getElementById('redon').onclick = function(){
+                    var text = 500;
+                    socket.emit('REDon', text);
+                };
+
+                document.getElementById('redoff').onclick = function(){
+                    socket.emit('REDoff');
+                };
+
+                document.getElementById('greenon').onclick = function(){
+                    var text = 500;
+                    socket.emit('GREENon', text);
+                };
+                
+                document.getElementById('greenoff').onclick = function(){
+                    socket.emit('GREENoff');
+                };
+                
+                document.getElementById('blueon').onclick = function(){
+                    var text = 500;
+                    socket.emit('BLUEon', text);
+                };
+                
+                document.getElementById('blueoff').onclick = function(){
+                    socket.emit('BLUEoff');
+                };
+            };
+        </script>
+    </head>
+    <body bgcolor="lightcyan">
+        <h2>임베디드 액츄레이터 제어</h2>
+        <br/>
+        <h4>LED1</h4>
+        <input type="button" id="ledon" value="ON"/>
+        <input type="button" id="ledoff" value="OFF"/>
+        <br/>
+        <h4>Buzzer</h4>
+        <input type="button" id="buzzeron" value="ON"/>
+        <input type="button" id="buzzeroff" value="OFF"/>
+        <h4>LED3</h4>
+        <h4>ON</h4>
+        <input type="button" id="redon" value="R"/>
+        <input type="button" id="greenon" value="G"/>
+        <input type="button" id="blueon" value="B"/>
+        <h4>OFF</h4>
+        <input type="button" id="redoff" value="R"/>
+        <input type="button" id="greenoff" value="G"/>
+        <input type="button" id="blueoff" value="B"/>
+    </body>
+</html>
