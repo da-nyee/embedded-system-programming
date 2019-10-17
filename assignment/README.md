@@ -64,3 +64,11 @@
 1. button을 3초 미만으로 계속 누르면, 파란색 LED가 0.5초 동안 켜지고 꺼진다.
 2. button을 3초 이상으로 계속 누르면, buzzer에서 0.3초 동안 소리가 나고 빨간색 LED가 켜진다.
 3. 무한반복 실행되며, ctrl+c를 누르면 LEDs, buzzer가 모두 꺼진 후 프로그램이 종료된다.
+<br>
+
+## web_cnt.js, web_ui.html
+### Actuators
+- a LED, buzzer, and LEDs
+### Development Requirements
+1. 제시된 사진과 동일한 웹 페이지를 생성한다. (사진 추가)
+2. 각 actuator는 ON을 클릭하면 켜지고, OFF를 클릭하면 꺼진다.
