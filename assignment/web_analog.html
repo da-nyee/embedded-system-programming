@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Embedded App</title>
+    </head>
+    <body bgcolor="lightcyan">
+        <h2>임베디드 시스템 제어</h2>
+        <hr>
+        <h3>사운드센서 측정 제어</h3>
+        <hr>
+        <ul>
+            <li>
+                <a href="/1">sound sensor 측정 ON</a>
+            </li>
+            <li>
+                <a href="/0">sound sensor 측정 OFF</a>
+            </li>
+        </ul>
+        <hr>
+        <h3>기준값 설정</h3>
+        <h6>기준값 입력범위: 0~4095(12bit)
+            입력값으로 조정 가능
+        </h6>
+        <hr>
+        <form name="soundon" method="POST">
+            <div class="input">
+                <span class="label">기준값</span>
+                <input type="text" name="threshold">
+            </div>
+            <hr>
+            <div class="input">
+                <input type="submit" value="기준값 설정">
+            </div>
+        </form>
+        <hr>
+        <h3>광센서 측정 제어</h3>
+        <hr>
+        <ul>
+            <li>
+                <a href="/3">light sensor 측정 ON</a>
+            </li>
+            <li>
+                <a href="/4">light sensor 측정 OFF</a>
+            </li>
+        </ul>
+    </body>
+</html>
