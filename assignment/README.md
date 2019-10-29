@@ -72,3 +72,18 @@
 ### Development Requirements
 1. 제시된 사진과 동일한 웹 페이지를 생성한다. (사진 추가)
 2. 각 actuator는 ON을 클릭하면 켜지고, OFF를 클릭하면 꺼진다.
+<br>
+
+## webanalog.js, web_analog.html
+### Analog Sensors
+- a sound and light
+### Actuator
+- LEDs
+### Development Requirements
+1. sound 센서는 CH 0에, light 센서는 CH 1에 연결한다.
+2. LEDs는 한 색만 Raspberry Pi에 연결한다.
+3. sound 센서로 주변 소리를 측정하고 아날로그 값(0~4095)을 출력한다.
+4. LEDs는 PWM 방식으로, light 센서의 아날로그 값(0~4095)에 따라 밝기(0~100)가 조절된다.
+> 다시 말해서, light 센서값은 10개 구간으로 나뉘고 LEDs의 밝기는 값의 정도에 따라 변한다.
+5. 웹 페이지에서 각 센서의 ON/OFF가 가능하다.
+6. 무한반복 실행되며, ctrl+c를 누르면 sound, light 센서, LEDs가 모두 꺼진 후 프로그램이 종료된다.
