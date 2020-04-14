@@ -107,7 +107,7 @@ app.get('/0', (req, res) => {
 
 app.get('/3', (req, res) => {
     console.log("light sensor 활성화 수행");
-    sid = setTimeout(LightDetect, 200); // 활성화
+    lid = setTimeout(LightDetect, 200); // 활성화
     res.redirect('/');
 });
 

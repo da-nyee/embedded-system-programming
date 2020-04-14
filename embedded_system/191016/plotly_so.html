@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script>
+            window.onload = function()
+            {
+                var socket = io.connect(); // 소켓 생성
+                var widthcount = 1;
+
+                socket.on('watch', function(sonicdata){ // 초음파 데이터 실시간 수신
+                        Plotly.extendTraces('chart', {y:[[sonicdata]]},[0]); // 차트에 그리기
+                        widthcount++; // 그래프 데이터 카운트
+                        if(widthcount > 100) // 100이상부터 차트 동적이동
+                        {
+                            Plotly.relayout('chart', {
+                                xaxis: {
+                                    range:[widthcount-99, widthcount] // x축 동적이동
+                                }
+                            });
+                        }
+                });
+
+                document.getElementById('start').onclick = function(){ // 문서 객체 이벤트 연결
+                    var text = document.getElementById('text').value;
+                    socket.emit('startmsg', text);
+                };
+
+                document.getElementById('stop').onclick = function(){
+                    var text = document.getElementById('text').value;
+                    socket.emit('stopmsg', text);
+                };
+            };
+        </script>
+    </head>
+    
+    <body bgcolor="lightcyan">
+        <h2>거리측정 제어(초음파센서 제어)</h2>
+        <hr>
+        <h3>측정주기 설정 및 가동</h3>
+        <h5>측정주기 입력범위: 500~1000(단위:ms), 입력값으로 조정 가능</h5>
+        <hr>
+        <input type="text" id="text" value="800" />ms
+        <input type="button" id="start" value="초음파센서 가동" />
+        <input type="button" id="stop" value="초음파센서 중지" />
+        <hr>
+        <div id="chart">
+            <script>
+                Plotly.plot('chart',[{
+                    y:[0], // 출력값 지정
+                    type:'line', // 선 차트
+                    line:{shape:'spline'} // 곡선형태
+                }]);
+            </script>
+        </div>
+    </body>
+</html>
