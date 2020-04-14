@@ -1,5 +1,5 @@
 ### HW
-- Raspberry Pi 3
+- Raspberry Pi 3 B+
 
 ### SW
 - Platform: Node.js
