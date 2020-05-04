@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html"; charset="UTF-8"/>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        
+        <script>
+            window.onload = function() {
+                var socket = io.connect();
+                var widthcount = 1;
+
+                socket.on("watch", function(redvalue, greenvalue) {
+                    Plotly.extendTraces("chart", { y: [[redvalue], [greenvalue]] }, [0, 1]);
+                    widthcount++;
+                    if(widthcount > 100){
+                        Plotly.relayout("chart", {
+                            xaxis: {
+                                range: [widthcount-99, widthcount]
+                            }
+                        });
+                    }
+                });
+
+                document.getElementById("start").onclick = function() {
+                    socket.emit("startmsg");
+                };
+                document.getElementById("stop").onclick = function() {
+                    socket.emit("stopmsg");
+                };
+            };
+        </script>
+    </head>
+    <body>
+        <h2>길거리 보행 신호등 제어</h2>
+        <hr>
+        <input type="button" id="start" value="전체기능실행"/>
+        <input type="button" id="stop" value="전체기능중지"/>
+        <hr>
+
+        <div id="chart">
+            <script>
+                var redvalue = {
+                    y: [0],
+                    name: "Red",
+                    type: "line",
+                    marker: { color: "rgb(255,0,0)" },
+                    line: { shape: "line" }
+                };
+                var greenvalue = {
+                    y: [0],
+                    name: "Green",
+                    type: "line",
+                    marker: { color: "rgb(0,255,0)" },
+                    line: { shape: "line" }
+                };
+
+                data = [redvalue, greenvalue];
+
+                Plotly.plot("chart", data);
+            </script>
+        </div>
+    </body>
+</html>
