@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html"; charset="UTF-8"/>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        
+        <script>
+            window.onload = function() {
+                var socket = io.connect();
+                var widthcount = 1;
+
+                socket.on("watch", function(lightdata) {
+                    Plotly.extendTraces("chart", { y: [[lightdata]] }, [0]);
+                    widthcount++;
+                    if(widthcount > 100){
+                        Plotly.relayout("chart", {
+                            xaxis: {
+                                range: [widthcount-99, widthcount]
+                            }
+                        });
+                    }
+                });
+
+                document.getElementById("start").onclick = function() {
+                    var text = document.getElementById("text").value;
+                    socket.emit("startmsg", text);
+                };
+                document.getElementById("stop").onclick = function() {
+                    var text = document.getElementById("text").value;
+                    socket.emit("stopmsg", text);
+                };
+            };
+        </script>
+    </head>
+    <body>
+        <h2>조도센서 아날로그 측정</h2>
+        <hr>
+        <input type="text" id="text" value="800"/>ms (ex. 500~1000ms)
+        <input type="button" id="start" value="조도센서 측정가동"/>
+        <input type="button" id="stop" value="조도센서 측정중지"/>
+        <hr>
+
+        <div id="chart">
+            <script>
+                var lightvalue = {
+                    y: [0],
+                    name: "Light",
+                    type: "line",
+                    marker: { color: "rgb(255,0,0)" },
+                    line: { shape: "spline" }
+                };
+                Plotly.plot("chart", [lightvalue]);
+            </script>
+        </div>
+    </body>
+</html>
